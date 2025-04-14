@@ -1,3 +1,4 @@
+from typing import Optional
 from uuid import UUID, uuid4
 from datetime import datetime
 from pydantic import Field, EmailStr
@@ -9,9 +10,9 @@ class User(Document):
     username: str = Indexed(str, unique=True)
     email: EmailStr = Indexed(EmailStr, unique=True)
     hashed_password: str
-    first_name: str
-    last_name: str
-    disabled: bool
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    disabled: Optional[bool] = None
 
     def __repr__(self) -> str:
         return f"<User {self.email}>"

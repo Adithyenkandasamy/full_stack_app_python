@@ -1,0 +1,32 @@
+from app.schemas.user_schema import UserAuth
+from app.models import User 
+from app.core.security import get_password
+from app.core.security import verify_password
+from typing import Optional
+
+
+class UserService:
+    @staticmethod 
+    async def create_user(user: UserAuth):
+        user_in = User(
+            username = user.username,
+            email = user.email,
+            hashed_password = get_password(user.password)
+        )
+        await user_in.save()
+        return user_in
+
+    @staticmethod
+    async def authenticate(email: str, password:str) -> Optional[User]:
+        user = await UserSerives.get_user_by_email(email=email)
+        if not user:
+            return None
+        if not verify_password(password, hashed_pass=user.hashed_password):
+            return None
+        return user
+              
+
+    @staticmethod
+    async def get_user_by_email(email: str) -> Optional[User]:
+        user = await User.find_one(User.email ==email)
+        return user
