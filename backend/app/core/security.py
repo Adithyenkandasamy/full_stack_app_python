@@ -7,7 +7,8 @@ from jose import jwt
 pwd_context = CryptContext(
     schemes=["bcrypt"],
     default="bcrypt",
-    bcrypt__rounds=12
+    bcrypt__rounds=12,
+    deprecated="auto"
 )
 
 
@@ -19,7 +20,7 @@ def create_access_token(subject: Union[str, Any], expires_delta: int = None) -> 
 
     to_encode = {"exp": expires_delta, "sub": str(subject)}    
     encoded_jwt = jwt.encode(to_encode, settings.JWT_SECRET_KEY, algorithm=settings.ALGORITHM)
-    return encode_jwt
+    return encoded_jwt
 
 
 def create_refresh_token(subject: Union[str, Any], expires_delta: int = None) -> str:

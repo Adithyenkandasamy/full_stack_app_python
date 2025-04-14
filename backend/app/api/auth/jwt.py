@@ -20,10 +20,10 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends())-> Any:
         )
 
     return {
-        "access_token": create_access_token(user.user_id),
-        "refresh_token": create_refresh_token(user.user_id),
+        "access_token": create_access_token(str(user.user_id)),  
+        "refresh_token": create_refresh_token(str(user.user_id)),  
     }
 
-@auth_router.post("/test-token", summary="test if the access token is valid", responce_model=UserOut)
+@auth_router.post("/test-token", summary="test if the access token is valid", response_model=UserOut)
 async def test_token(user: User = Depends(get_current_user)):
     return user    
