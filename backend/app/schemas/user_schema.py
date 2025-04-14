@@ -17,4 +17,4 @@ class UserOut(BaseModel):
     hashed_password: str
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-    disabled: Optional[bool] = None
+    disabled: Optional[bool] = False
