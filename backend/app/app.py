@@ -27,10 +27,12 @@ async def app_init():
         initialize crucial application services
     """
     
-    db_client = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING).fodoist
+    # For MongoDB Atlas, we need to specify the database name directly
+    db_client = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING)
+    db = db_client.fodoist
     
     await init_beanie(
-        database=db_client,
+        database=db,
         document_models= [
             User,
             Todo

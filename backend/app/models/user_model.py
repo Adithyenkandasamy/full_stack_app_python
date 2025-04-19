@@ -13,6 +13,8 @@ class User(Document):
     last_name: Optional[str] = None
     disabled: Optional[bool] = None
     
+   
+    
     def __repr__(self) -> str:
         return f"<User {self.email}>"
 
@@ -35,5 +37,5 @@ class User(Document):
     async def by_email(self, email: str) -> "User":
         return await self.find_one(self.email == email)
     
-    class Collection:
+    class Settings:
         name = "users"

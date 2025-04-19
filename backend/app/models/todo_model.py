@@ -14,6 +14,7 @@ class Todo(Document):
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     owner: Link[User]
     
+    
     def __repr__(self) -> str:
         return f"<Todo {self.title}>"
 
@@ -32,6 +33,5 @@ class Todo(Document):
     def update_update_at(self):
         self.updated_at = datetime.utcnow()
         
-    
-    class Collection:
+    class Settings:
         name = "todos"

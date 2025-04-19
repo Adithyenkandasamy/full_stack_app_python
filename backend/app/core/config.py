@@ -3,7 +3,6 @@ from typing import List
 from decouple import config
 from pydantic import AnyHttpUrl, BaseSettings
 
-
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     JWT_SECRET_KEY: str = config("JWT_SECRET_KEY", cast=str)
