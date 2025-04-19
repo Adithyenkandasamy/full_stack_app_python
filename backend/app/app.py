@@ -16,7 +16,10 @@ async def app_init():
    """
       Initialize crucial application services
    """
-   db_client = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING).fodoist
+   # Create MongoDB client with SSL settings
+   db_client = AsyncIOMotorClient(
+      settings.MONGO_CONNECTION_STRING + "&ssl=true&tlsAllowInvalidCertificates=true"
+   ).fodoist
 
    await init_beanie(
       database=db_client,
